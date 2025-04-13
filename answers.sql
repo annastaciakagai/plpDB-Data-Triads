@@ -1,6 +1,40 @@
 CREATE DATABASE bookstore;
 USE bookstore;
 
+CREATE TABLE book(
+book_id INT PRIMARY KEY NOT NULL,
+title VARCHAR(100) NOT NULL,
+publisher_id INT,
+language_id INT,
+book_price INT,
+year_published YEAR,
+FOREIGN KEY(publisher_id) REFERENCES publisher(publisher_id),
+FOREIGN KEY (language_id) REFERENCES book_language(language_id)
+);
+
+CREATE TABLE book_author(
+book_id INT NOT NULL,
+author_id INT NOT NULL,
+CONSTRAINT pk_book_author PRIMARY KEY (book_id, author_id),
+FOREIGN KEY(book_id) REFERENCES book(book_id),
+FOREIGN KEY (author_id) REFERENCES author(author_id)
+);
+
+CREATE TABLE author(
+author_id INT PRIMARY KEY NOT NULL,
+author_name VARCHAR(250)
+);
+
+CREATE TABLE book_language(
+language_id INT PRIMARY KEY NOT NULL,
+language_name VARCHAR(250) NOT NULL
+);
+
+CREATE TABLE publisher(
+publisher_id INT PRIMARY KEY NOT NULL ,
+publisher_name VARCHAR(250) NOT NULL
+);
+
 CREATE TABLE cust_order (
     order_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT NOT NULL,
