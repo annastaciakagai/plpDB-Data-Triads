@@ -35,6 +35,40 @@ publisher_id INT PRIMARY KEY NOT NULL ,
 publisher_name VARCHAR(250) NOT NULL
 );
 
+CREATE TABLE customer(
+customer_id INT PRIMARY KEY AUTO_INCREMENT,
+first_name VARCHAR(100),
+last_name VARCHAR(100),
+customer_email VARCHAR(100)
+);
+
+CREATE TABLE country(
+country_id INT PRIMARY KEY AUTO_INCREMENT,
+country_name VARCHAR(30)
+);
+
+CREATE TABLE address(
+address_status INT PRIMARY KEY AUTO_INCREMENT,
+street VARCHAR(30),
+city VARCHAR(30),
+postal_code VARCHAR(20),
+country_id INT,
+FOREIGN KEY (country_id) REFERENCES country(country_id)
+);
+
+CREATE TABLE address_status(
+address_status_id INT PRIMARY KEY AUTO_INCREMENT,
+status_name VARCHAR(20)
+);
+
+CREATE TABLE customer_address(
+customer_id INT PRIMARY KEY AUTO_INCREMENT,
+address_id INT,
+address_status_id INT,
+FOREIGN KEY (address_status_id) REFERENCES address_status(address_status_id)
+);
+
+
 CREATE TABLE cust_order (
     order_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT NOT NULL,
